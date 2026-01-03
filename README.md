@@ -58,19 +58,51 @@ Frontend şu adres üzerinde çalışacaktır: http://localhost:3000
 
 ## 📦 Deployment (VPS)
 
-Ubuntu 24.04 LTS'ye deployment yapmak için:
+Ubuntu 24.04 LTS'ye deployment yapmak için **iki seçenek** var:
+
+### 🐳 Seçenek 1: Docker Compose (ÖNERİLEN)
+
+**Hızlı ve kolay!** Tek komutla deploy edin:
 
 ```bash
-cd deploy
+cd /opt/nexaven
+chmod +x deploy/docker-deploy.sh
+./deploy/docker-deploy.sh
+```
+
+**Detaylı rehber:** [DOCKER-DEPLOYMENT.md](DOCKER-DEPLOYMENT.md)
+
+### 📦 Seçenek 2: Native (Nginx + Node.js)
+
+**Manuel kurulum:**
+
+```bash
+cd /tmp/Nexaven\ Website/deploy
 chmod +x deploy.sh
 ./deploy.sh
 ```
 
-Script otomatik olarak:
-- Node.js ve Nginx'i kuracak
-- Uygulamayı `/var/www/nexaven` dizinine yerleştirecek
-- SSL sertifikası (Let's Encrypt) kuracak
-- Systemd servisi yapılandıracak
+**Detaylı rehber:** [VPS-DEPLOYMENT.md](VPS-DEPLOYMENT.md)
+
+---
+
+## 🐳 Docker Hızlı Başlangıç
+
+```bash
+# Build
+docker compose build
+
+# Başlat
+docker compose up -d
+
+# Durumu kontrol et
+docker compose ps
+
+# Logları görüntüle
+docker compose logs -f
+```
+
+**Mini rehber:** [DOCKER-QUICKSTART.md](DOCKER-QUICKSTART.md)
 
 ## 📝 .env Dosyası
 

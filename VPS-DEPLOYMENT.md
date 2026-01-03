@@ -6,6 +6,29 @@ Adım adım VPS'e deployment yönergeleri.
 
 ---
 
+## 🎯 Deployment Seçenekleri
+
+**İki farklı yöntemle deploy edebilirsiniz:**
+
+### 🐳 Seçenek 1: Docker Compose (ÖNERİLEN)
+- ✅ **Kolay kurulum** - Tek komut
+- ✅ **İzole ortam** - Container'da çalışır
+- ✅ **Kolay güncelleme** - `docker compose up -d --build`
+- ✅ **Taşınabilir** - Her yerde çalışır
+- ⏱️ **Kurulum süresi:** ~10 dakika
+
+**👉 [DOCKER-DEPLOYMENT.md](DOCKER-DEPLOYMENT.md) - TAVSİYE EDİLİR**
+
+### 📦 Seçenek 2: Native (Nginx + Node.js)
+- ✅ **Direkt performans** - Overhead yok
+- ✅ **Daha fazla kontrol** - Sistem seviyesi yönetim
+- ⚠️ **Manuel yapılandırma** - Daha fazla adım
+- ⏱️ **Kurulum süresi:** ~20 dakika
+
+**👉 Aşağıdaki adımları takip edin**
+
+---
+
 ## 📋 Ön Koşullar
 
 - ✅ Ubuntu 24.04 LTS VPS
@@ -32,18 +55,38 @@ ssh root@192.168.1.100
 
 ### Windows Powershell'den:
 ```powershell
+# Docker için
+scp -r "a:\Nexaven Website" root@your-vps-ip:/opt/nexaven
+
+# Native için
 scp -r "a:\Nexaven Website" root@your-vps-ip:/tmp/
 ```
 
 ### Linux/Mac'ten:
 ```bash
+# Docker için
+scp -r ./Nexaven\ Website root@your-vps-ip:/opt/nexaven
+
+# Native için
 scp -r ./Nexaven\ Website root@your-vps-ip:/tmp/
 ```
 
 VPS'de kontrol edin:
 ```bash
+# Docker için
+ls -la /opt/nexaven/
+
+# Native için
 ls -la /tmp/Nexaven\ Website/
 ```
+
+---
+
+## 🐳 Docker Deployment (Önerilen - Buradan devam edin)
+
+**Docker ile deploy etmek istiyorsanız:** **[DOCKER-DEPLOYMENT.md](DOCKER-DEPLOYMENT.md)** dosyasına geçin.
+
+**Native kurulum için aşağıdaki adımları takip edin:**
 
 ---
 

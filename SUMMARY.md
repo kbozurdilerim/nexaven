@@ -78,7 +78,25 @@ npm run dev
 
 ✅ http://localhost:3000 açın
 
-### 2️⃣ VPS'ye Deployment (10-15 dakika)
+### 2️⃣ VPS'ye Deployment
+
+#### 🐳 Docker (ÖNERİLEN - 10 dakika)
+
+```bash
+# Dosyaları kopyala
+scp -r "Nexaven Website" root@your-vps-ip:/opt/nexaven
+
+# VPS'de Docker ile başlat
+ssh root@your-vps-ip
+cd /opt/nexaven
+chmod +x deploy/docker-deploy.sh
+./deploy/docker-deploy.sh
+```
+
+✅ http://your-vps-ip açın
+📚 Detay: [DOCKER-DEPLOYMENT.md](DOCKER-DEPLOYMENT.md)
+
+#### 📦 Native (20 dakika)
 
 ```bash
 # VPS'ye dosya kopyala
@@ -92,6 +110,7 @@ chmod +x deploy.sh
 ```
 
 ✅ https://nexaven.com.tr açın
+📚 Detay: [VPS-DEPLOYMENT.md](VPS-DEPLOYMENT.md)
 
 ### 3️⃣ Admin Paneli (1 dakika)
 
