@@ -10,8 +10,9 @@ services:
       - NODE_ENV=production
       - JWT_SECRET=${JWT_SECRET:-nexaven-secret-key-2024}
       - PORT=5000
+      - DB_PATH=/app/backend/data/nexaven.db
     volumes:
-      - nexaven-db:/app/backend
+      - nexaven-db:/app/backend/data
     networks:
       - nexaven-network
     restart: unless-stopped

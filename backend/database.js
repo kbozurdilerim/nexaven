@@ -1,13 +1,18 @@
 import sqlite3 from 'sqlite3';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const dbPath = process.env.DB_PATH || path.join(__dirname, 'data', 'nexaven.db');
+
+// Ensure DB directory exists
+fs.mkdirSync(path.dirname(dbPath), { recursive: true });
 
 class Database {
   constructor() {
-    this.db = new sqlite3.Database(path.join(__dirname, 'nexaven.db'), (err) => {
+    this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
         console.error('Database open error:', err);
       } else {

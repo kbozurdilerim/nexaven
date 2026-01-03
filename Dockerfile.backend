@@ -1,19 +1,27 @@
-FROM node:20-alpine
+FROM node:20-bullseye-slim
 
 # Çalışma dizini
 WORKDIR /app/backend
 
 # Build bağımlılıkları (sqlite için gerekli derleme araçları)
-RUN apk add --no-cache python3 make g++
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends python3 make g++ \
+  && rm -rf /var/lib/apt/lists/*
 
 # Package dosyalarını kopyala
 COPY package*.json ./
 
+# NPM'ye python yolunu göster
+RUN npm config set python /usr/bin/python3
+
 # Bağımlılıkları yükle
-RUN npm install --production
+RUN npm install --omit=dev
 
 # Backend dosyalarını kopyala
 COPY . .
+
+# DB klasörü
+RUN mkdir -p /app/backend/data
 
 # Port aç
 EXPOSE 5000
