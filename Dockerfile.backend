@@ -5,14 +5,14 @@ WORKDIR /app/backend
 
 # Build bağımlılıkları (sqlite için gerekli derleme araçları)
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends python3 make g++ \
+  && apt-get install -y --no-install-recommends python3 python3-dev make g++ build-essential pkg-config \
   && rm -rf /var/lib/apt/lists/*
+
+# Python yolunu ENV ile belirt (node-gyp için)
+ENV PYTHON=/usr/bin/python3
 
 # Package dosyalarını kopyala
 COPY package*.json ./
-
-# NPM'ye python yolunu göster
-RUN npm config set python /usr/bin/python3
 
 # Bağımlılıkları yükle
 RUN npm install --omit=dev
