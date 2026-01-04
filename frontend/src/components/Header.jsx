@@ -31,6 +31,15 @@ export default function Header() {
           </Link>
           <Link to="/services" className="hover:text-primary-500 transition">
             Hizmetler
+          @@          <Link to="/özellikleri" className="hover:text-primary-500 transition">
+          @@            Özellikleri
+          @@          </Link>
+          @@          <Link to="/indir" className="hover:text-primary-500 transition">
+          @@            İndir
+          @@          </Link>
+          @@          <Link to="/iletisim" className="hover:text-primary-500 transition">
+          @@            İletişim
+          @@          </Link>
           </Link>
 
           {/* Admin Link */}
@@ -87,6 +96,15 @@ export default function Header() {
                 Hakkında
               </Link>
               <Link to="/services" onClick={() => setMenuOpen(false)}>
+                @@              <Link to="/özellikleri" onClick={() => setMenuOpen(false)}>
+                @@                Özellikleri
+                @@              </Link>
+                @@              <Link to="/indir" onClick={() => setMenuOpen(false)}>
+                @@                İndir
+                @@              </Link>
+                @@              <Link to="/iletisim" onClick={() => setMenuOpen(false)}>
+                @@                İletişim
+                @@              </Link>
                 Hizmetler
               </Link>
               {isAdmin && (

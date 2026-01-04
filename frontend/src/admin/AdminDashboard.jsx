@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
-import { BarChart3, Settings, FileText, Zap } from 'lucide-react';
+import { BarChart3, Settings, FileText, Zap, Server, Users } from 'lucide-react';
 
 export default function AdminDashboard() {
   const { isAdmin, user } = useAuth();
@@ -76,6 +76,30 @@ export default function AdminDashboard() {
           >
             <Settings size={20} />
             Sayfalar
+         
+                    <Link
+                      to="/admin/servers"
+                      className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${
+                        isActive('/admin/servers')
+                          ? 'bg-primary-600 text-white'
+                          : 'text-gray-400 hover:bg-dark-700'
+                      }`}
+                    >
+                      <Server size={20} />
+                      Sunucular
+                    </Link>
+         
+                    <Link
+                      to="/admin/users"
+                      className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${
+                        isActive('/admin/users')
+                          ? 'bg-primary-600 text-white'
+                          : 'text-gray-400 hover:bg-dark-700'
+                      }`}
+                    >
+                      <Users size={20} />
+                      Kullanıcılar
+                    </Link>
           </Link>
         </nav>
       </aside>

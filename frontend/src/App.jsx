@@ -11,6 +11,11 @@ import AdminHome from './admin/pages/AdminHome';
 import AdminServices from './admin/pages/AdminServices';
 import AdminAbout from './admin/pages/AdminAbout';
 import AdminPages from './admin/pages/AdminPages';
+@@import FeaturesPage from './pages/FeaturesPage';
+@@import DownloadPage from './pages/DownloadPage';
+@@import ContactPage from './pages/ContactPage';
+@@import AdminServers from './admin/pages/AdminServers';
+@@import AdminUsers from './admin/pages/AdminUsers';
 import './index.css';
 
 function ProtectedRoute({ children }) {
@@ -50,6 +55,9 @@ function AppContent() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
+        @@        <Route path="/özellikleri" element={<FeaturesPage />} />
+        @@        <Route path="/indir" element={<DownloadPage />} />
+        @@        <Route path="/iletisim" element={<ContactPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
@@ -66,6 +74,8 @@ function AppContent() {
           <Route path="services" element={<AdminServices />} />
           <Route path="about" element={<AdminAbout />} />
           <Route path="pages" element={<AdminPages />} />
+        @@          <Route path="servers" element={<AdminServers />} />
+        @@          <Route path="users" element={<AdminUsers />} />
         </Route>
 
         {/* Catch all */}

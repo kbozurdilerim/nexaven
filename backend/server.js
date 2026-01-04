@@ -6,6 +6,9 @@ import authRoutes from './routes/auth.js';
 import adminRoutes from './routes/admin.js';
 import publicRoutes from './routes/public.js';
 import { authenticateToken } from './middleware/auth.js';
+@@import bcrypt from 'bcryptjs';
+@@import { v4 as uuidv4 } from 'uuid';
+@@import { getDatabase } from './database.js';
 
 dotenv.config();
 
@@ -18,6 +21,38 @@ app.use(express.json());
 
 // Initialize Database
 await initDB();
+@@
+@@// Auto-create admin user if not exists
+@@async function ensureAdminExists() {
+@@  try {
+@@    const db = getDatabase();
+@@    const adminEmail = 'admin@nexaven.com';
+@@    const adminPassword = 'Admin@123456';
+@@    
+@@    const existingAdmin = await db.get(
+@@      'SELECT * FROM users WHERE email = ? AND role = ?',
+@@      [adminEmail, 'admin']
+@@    );
+@@
+@@    if (!existingAdmin) {
+@@      const hashedPassword = await bcrypt.hash(adminPassword, 10);
+@@      const userId = uuidv4();
+@@      
+@@      await db.run(
+@@        'INSERT INTO users (id, email, password, full_name, role) VALUES (?, ?, ?, ?, ?)',
+@@        [userId, adminEmail, hashedPassword, 'Admin Kullanıcı', 'admin']
+@@      );
+@@      
+@@      console.log('✓ Admin kullanıcı oluşturuldu');
+@@      console.log(`  E-posta: ${adminEmail}`);
+@@      console.log(`  Şifre: ${adminPassword}`);
+@@    }
+@@  } catch (error) {
+@@    console.error('Admin oluşturma hatası:', error);
+@@  }
+@@}
+@@
+@@await ensureAdminExists();
 
 // Routes
 app.use('/api/auth', authRoutes);
